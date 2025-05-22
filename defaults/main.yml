@@ -5,3 +5,6 @@ systemd_service_name: null
 
 # Whether or not the systemd service is enabled.
 systemd_service_enabled: true
+
+# The systemd service state.
+systemd_service_state: started

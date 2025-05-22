@@ -9,3 +9,8 @@
       ansible.builtin.systemd:
         name: "{{ systemd_service_name }}"
         enabled: "{{ systemd_service_enabled }}"
+
+    - name: Ensure systemd service started {{ systemd_service_name }}
+      ansible.builtin.systemd:
+        name: "{{ systemd_service_name }}"
+        state: "{{ systemd_service_state }}"
