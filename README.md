@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/1000Bulbs/ansible-role-systemd_service/actions/workflows/ci.yml/badge.svg)](https://github.com/1000Bulbs/ansible-role-systemd_service/actions/workflows/ci.yml)
 
-A brief description of the role goes here.
+Manages the state of systemd services on Linux systems. It provides a flexible interface for starting, stopping, enabling, disabling, reloading, and restarting services using the `systemd` module. The role is ideal for infrastructure automation where consistent and repeatable service management is required.
 
 ---
 
@@ -20,7 +20,11 @@ These variables can be overridden in your inventory, playbooks, or `group_vars`.
 
 ### Defaults (`defaults/main.yml`)
 
-Add a list of default variables that are defined in the role's `defaults/main.yml` file.
+| Variable                  | Description                                                                           | Default Value |
+| ------------------------- | ------------------------------------------------------------------------------------- | ------------- |
+| `systemd_service_name`    | **Required.** The name of the systemd service to manage.                              | —             |
+| `systemd_service_enabled` | Whether the service should be enabled at boot.                                        | `false`       |
+| `systemd_service_state`   | Desired state of the service. Options: `started`, `stopped`, `restarted`, `reloaded`. | `started`     |
 
 ### Variables (`vars/main.yml`)
 
@@ -30,8 +34,7 @@ _No variables defined._
 
 ## 📦 Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be
-set for other roles, or variables that are used from other roles.
+_None._
 
 ---
 
@@ -57,15 +60,16 @@ ansible-galaxy role install -r requirements.yml
 
 ## 💡 Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for
-users too:
-
 ```yaml
-- name: My Playbook
+- name: Manage example systemd service
   hosts: all
   become: true
   roles:
     - role: okb.systemd_service
+      vars:
+        systemd_service_name: example
+        systemd_service_enabled: true
+        systemd_service_state: started
 ```
 
 ---
