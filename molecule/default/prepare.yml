@@ -3,6 +3,19 @@
 - name: Prepare test host
   hosts: all
   become: true
+
+  vars:
+    systemd_unit_name: example
+    systemd_unit_type: service
+    systemd_unit_generic_options:
+      - Description=Example Service
+      - After=network.target
+    systemd_unit_options:
+      - ExecStart=/bin/bash -c 'while true; do echo "running"; sleep 60; done'
+      - Restart=always
+    systemd_unit_install_options:
+      - WantedBy=multi-user.target
+
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
@@ -10,3 +23,7 @@
         cache_valid_time: 600
       register: apt_cache_update
       when: ansible_os_family == "Debian"
+
+    - name: Ensure systemd unit {{ systemd_unit_name }}
+      ansible.builtin.include_role:
+        name: okb.systemd_unit

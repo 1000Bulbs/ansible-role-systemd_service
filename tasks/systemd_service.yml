@@ -1,0 +1,11 @@
+# tasks/systemd_service.yml
+---
+- name: Ensure systemd service {{ systemd_service_name }}
+  become: true
+  when:
+    - systemd_service_name | length
+  block:
+    - name: Ensure systemd service enabled {{ systemd_service_name }}
+      ansible.builtin.systemd:
+        name: "{{ systemd_service_name }}"
+        enabled: "{{ systemd_service_enabled }}"

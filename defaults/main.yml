@@ -2,3 +2,6 @@
 ---
 # Name of the systemd service.
 systemd_service_name: null
+
+# Whether or not the systemd service is enabled.
+systemd_service_enabled: true
