@@ -1,0 +1,6 @@
+# tasks/prerequisites.yml
+---
+- name: Ensure systemd_service_name is set
+  when: systemd_service_name is not defined or systemd_service_name is none
+  ansible.builtin.fail:
+    msg: Please make sure that 'systemd_service_name' is set

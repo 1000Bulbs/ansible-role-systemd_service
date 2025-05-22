@@ -1,2 +1,4 @@
 # defaults/main.yml
 ---
+# Name of the systemd service.
+systemd_service_name: null
